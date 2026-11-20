@@ -3,25 +3,88 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-fern-primary: #1F4A3A;
+  --color-gold-sunset: #B8894A;
+  --color-ivory-cream: #F6F1E7;
+  --color-sage-soft: #7E9A6B;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Custom Smooth Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F6F1E7;
+}
+::-webkit-scrollbar-thumb {
+  background: #B8894A;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1F4A3A;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* Luxury Paper Texture Effect */
+.paper-texture {
+  background-color: #F6F1E7;
+  background-image: radial-gradient(#B8894A15 0.75px, transparent 0.75px), radial-gradient(#1F4A3A10 0.75px, #F6F1E7 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Cut-paper layered depth styling (inspired by SmartDuke Petrel) */
+.cut-paper-1 {
+  filter: drop-shadow(0 8px 12px rgba(16, 40, 31, 0.08));
+}
+.cut-paper-2 {
+  filter: drop-shadow(0 16px 24px rgba(16, 40, 31, 0.12));
+}
+.cut-paper-3 {
+  filter: drop-shadow(0 24px 36px rgba(16, 40, 31, 0.16));
+}
+
+/* Gold foil embossed effect */
+.gold-foil-text {
+  background: linear-gradient(135deg, #DFB16E 0%, #B8894A 50%, #E8C88B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glass card styling */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(184, 137, 74, 0.22);
+}
+
+.glass-panel-dark {
+  background: rgba(16, 40, 31, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 163, 115, 0.25);
+}
+
+/* Shimmer animation */
+@keyframes gold-shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.animate-gold-shine {
+  position: relative;
+  overflow: hidden;
+}
+.animate-gold-shine::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: gold-shine 3s infinite;
+}
+
+/* Elegant selection styling */
+::selection {
+  background: #B8894A;
+  color: #FFFFFF;
 }
