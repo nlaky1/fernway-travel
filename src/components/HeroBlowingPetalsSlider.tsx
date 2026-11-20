@@ -6,7 +6,6 @@ import SoundscapePlayer from "./SoundscapePlayer";
 import {
   Compass,
   MapPin,
-  Calendar,
   Sparkles,
   ArrowRight,
   MessageCircle,
@@ -17,6 +16,7 @@ import {
   Pause,
   Play,
   HeartHandshake,
+  ShieldCheck,
 } from "lucide-react";
 
 interface LocationSlide {
@@ -52,8 +52,8 @@ const LOCATION_SLIDES: LocationSlide[] = [
     temperature: "19°C • Misty Rainforest",
     vibe: "Rainforest canopy, double-decker living root bridges & glass riverboats",
     accentColor: "#36765B",
-    bgGradient: "from-[#0F261D]/90 via-[#18392C]/85 to-[#244E3D]/70",
-    photoUrl: "https://images.unsplash.com/photo-1626014303757-6466336e4f3a?auto=format&fit=crop&w=1200&q=80",
+    bgGradient: "from-black/85 via-black/50 to-black/80",
+    photoUrl: "https://images.unsplash.com/photo-1626014303757-6466336e4f3a?auto=format&fit=crop&w=1600&q=80",
     highlights: ["Double Decker Living Root Bridge", "Wei Sawdong 3-Tier Falls", "Dawki Transparent Waters", "Private Khasi Dinner"],
   },
   {
@@ -62,7 +62,7 @@ const LOCATION_SLIDES: LocationSlide[] = [
     stateOrCountry: "Western India",
     tagline: "Palaces, Golden Dunes & Desert Glamour",
     description:
-      "Amber sandstone citadels, private palace rooftop dining, starlit luxury desert glamping at Sam Dunes, and folk music soirées.",
+      "Amber sandstone ramparts, private palace rooftop dining, starlit luxury desert glamping at Sam Dunes, and folk music soirées.",
     dates: "November 12 – 18, 2026",
     price: "₹48,000",
     deposit: "₹12,000",
@@ -70,8 +70,8 @@ const LOCATION_SLIDES: LocationSlide[] = [
     temperature: "26°C • Golden Sunset",
     vibe: "Sandstone havelis, luxury desert glamping & private royal high tea",
     accentColor: "#B8894A",
-    bgGradient: "from-[#2A180E]/90 via-[#4A2914]/85 to-[#733F1B]/70",
-    photoUrl: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80",
+    bgGradient: "from-black/85 via-black/50 to-black/80",
+    photoUrl: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1600&q=80",
     highlights: ["Jaisalmer Fort Private Walk", "Sam Sand Dunes Royal Glamping", "Jodhpur Blue City Rooftops", "Campfire Kalbelia Dance"],
   },
   {
@@ -88,8 +88,8 @@ const LOCATION_SLIDES: LocationSlide[] = [
     temperature: "15°C • Crisp Mountain Air",
     vibe: "Floating lake markets, cedar heritage houseboats & pine meadows",
     accentColor: "#4A6E82",
-    bgGradient: "from-[#0E1E28]/90 via-[#1C3343]/85 to-[#2B4B60]/70",
-    photoUrl: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1200&q=80",
+    bgGradient: "from-black/85 via-black/50 to-black/80",
+    photoUrl: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1600&q=80",
     highlights: ["Dal Lake Luxury Houseboat", "Pahalgam Betaab Valley Walk", "Pampore Saffron High Tea", "Sunset Shikara Cruise"],
   },
   {
@@ -106,8 +106,8 @@ const LOCATION_SLIDES: LocationSlide[] = [
     temperature: "27°C • Tropical Sun",
     vibe: "Private pool villas, organic herbal spas & Indian Ocean dusk",
     accentColor: "#5C8C67",
-    bgGradient: "from-[#0D2418]/90 via-[#1A3827]/85 to-[#2A543C]/70",
-    photoUrl: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80",
+    bgGradient: "from-black/85 via-black/50 to-black/80",
+    photoUrl: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1600&q=80",
     highlights: ["Ubud Sacred Sanctuary", "Sound Bath at Pyramids of Chi", "Private Luxury Pool Villa", "Jimbaran Beach Dinner"],
   },
   {
@@ -124,8 +124,8 @@ const LOCATION_SLIDES: LocationSlide[] = [
     temperature: "25°C • Lantern Glow",
     vibe: "Luxury Halong cruise suites & lantern-lit ancient canal walks",
     accentColor: "#C16B45",
-    bgGradient: "from-[#1B1A28]/90 via-[#2E283F]/85 to-[#4B3C53]/70",
-    photoUrl: "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=80",
+    bgGradient: "from-black/85 via-black/50 to-black/80",
+    photoUrl: "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1600&q=80",
     highlights: ["Halong Bay Luxury Suite Cruise", "Hoi An Silk Tailoring Walk", "Ba Na Hills Golden Bridge", "Hanoi Old Quarter"],
   },
 ];
@@ -141,16 +141,15 @@ export default function HeroBlowingPetalsSlider() {
   const DWELL_TIME_MS = 6000;
   const INTERVAL_STEP = 50;
 
-  // Trigger the blowing gust animation
+  // Trigger the blowing gust animation and advance slide
   const triggerKissBreeze = (targetIndex?: number) => {
     setIsBlowing(true);
 
-    // Trigger physical petal and fern gust from woman's hand coordinates
+    // Trigger physical petal and fern gust across full screen
     if (petalCanvasRef.current) {
       petalCanvasRef.current.triggerBlowGust();
     }
 
-    // Advance to next or target slide
     setTimeout(() => {
       if (targetIndex !== undefined) {
         setCurrentIndex(targetIndex);
@@ -159,7 +158,7 @@ export default function HeroBlowingPetalsSlider() {
       }
       setProgress(0);
       setIsBlowing(false);
-    }, 320);
+    }, 280);
   };
 
   const handlePrev = () => {
@@ -189,270 +188,264 @@ export default function HeroBlowingPetalsSlider() {
   }, [isAutoPlaying, currentIndex]);
 
   return (
-    <section className="relative min-h-[96vh] w-full overflow-hidden bg-ivory-100 pt-28 pb-14 transition-colors duration-700">
-      {/* Dynamic 60fps Petal & Fern Particle Engine with Hand-Burst Capability */}
-      <BlowingPetalCanvas ref={petalCanvasRef} windIntensity={1.1} />
+    <section className="relative min-h-[94vh] lg:min-h-screen w-full overflow-hidden bg-fern-950 text-ivory-100 flex flex-col justify-between pt-36 pb-10">
+      {/* 
+        ========================================================================
+        1. THE FULL BLEED BACKGROUND SLIDER (Location Panoramas taking 100% screen)
+        ========================================================================
+      */}
+      <div className="absolute inset-0 z-0">
+        {LOCATION_SLIDES.map((slide, idx) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+              idx === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+            }`}
+            style={{ backgroundImage: `url(${slide.photoUrl})` }}
+          >
+            {/* Cinematic Multilayer Vignettes so text and foreground remain crystal clear */}
+            <div className={`absolute inset-0 bg-gradient-to-r ${slide.bgGradient}`} />
+            <div className="absolute inset-0 bg-gradient-to-t from-fern-950 via-black/30 to-black/60" />
+            <div className="absolute inset-0 bg-radial-vignette opacity-60" />
+          </div>
+        ))}
+      </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-30">
-        {/* Top Header Badge & Tagline */}
-        <div className="mx-auto max-w-3xl text-center mb-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-white/80 px-4 py-1.5 shadow-sm backdrop-blur-md mb-3.5">
-            <span className="flex h-2 w-2 rounded-full bg-gold-500 animate-pulse" />
-            <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-fern-800">
-              Women-Only Boutique Travel Collective
-            </span>
-            <span className="text-gold-500">✦</span>
-            <span className="text-[11px] font-medium text-fern-600">Solo, Not Alone</span>
+      {/* 
+        ========================================================================
+        2. FULL-VIEWPORT 60FPS BOTANICAL PETAL & FERN CANVAS
+        ========================================================================
+      */}
+      <BlowingPetalCanvas ref={petalCanvasRef} windIntensity={1.2} />
+
+      {/* 
+        ========================================================================
+        3. HERO MAIN STAGE: Woman Blowing Petals (Left) + Editorial Content (Right)
+        ========================================================================
+      */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20 my-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          {/* LEFT: The Woman Blowing Ferns & Petals */}
+          <div className="lg:col-span-5 flex flex-col items-center lg:items-start">
+            <div className="relative group">
+              {/* Outer Golden Aura Glow */}
+              <div
+                className={`absolute -inset-3 rounded-full bg-gradient-to-tr from-gold-500/30 to-fern-400/30 blur-2xl transition-all duration-700 ${
+                  isBlowing ? "opacity-100 scale-110" : "opacity-60 scale-100"
+                }`}
+              />
+
+              {/* Luxury Archway Cameo with Gold Foil Rim */}
+              <div className="relative w-64 sm:w-72 md:w-80 h-80 sm:h-96 rounded-t-full rounded-b-3xl overflow-hidden border-2 border-gold-400/60 shadow-2xl cut-paper-3 bg-fern-900/40 backdrop-blur-sm">
+                <img
+                  src="/brand/woman_blowing_petals.jpg"
+                  alt="Woman gently blowing ferns and petals into the horizon"
+                  className={`h-full w-full object-cover object-top transition-transform duration-700 ${
+                    isBlowing ? "scale-105" : "group-hover:scale-102"
+                  }`}
+                />
+
+                {/* Soft gradient bottom vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-fern-950 via-transparent to-transparent opacity-85" />
+
+                {/* Interactive Breathing Palm Button */}
+                <div className="absolute bottom-4 left-3 right-3 text-center">
+                  <button
+                    onClick={() => triggerKissBreeze()}
+                    className="group/btn relative inline-flex items-center gap-2 rounded-full bg-gold-500 px-4 py-2 text-xs font-semibold text-fern-950 shadow-lg hover:bg-gold-400 active:scale-95 transition-all"
+                  >
+                    <Wind className="h-3.5 w-3.5 animate-spin" />
+                    <span>Blow Petals &amp; Discover</span>
+                    <span className="text-fern-950 font-bold">✦</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Reassuring Sisterhood Tag */}
+              <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-black/60 backdrop-blur-md px-3.5 py-1 text-xs text-gold-300 border border-gold-500/30">
+                <Sparkles className="h-3.5 w-3.5 text-gold-400" />
+                <span className="font-medium">Solo, Not Alone • All-Women Cohorts</span>
+              </div>
+            </div>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.08] tracking-tight text-fern-900">
-            Blow a Kiss to the Horizon. <br className="hidden sm:inline" />
-            <span className="italic font-light text-gold-500">Wander Freely.</span> In Style.
-          </h1>
+          {/* RIGHT: Editorial Headline & Floating Destination Pass (SmartDuke Style) */}
+          <div className="lg:col-span-7 flex flex-col items-start space-y-6">
+            {/* Top Category Tag */}
+            <div className="inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-black/40 px-3.5 py-1 text-xs font-medium uppercase tracking-[0.2em] text-gold-300 backdrop-blur-md">
+              <span className="flex h-1.5 w-1.5 rounded-full bg-gold-400 animate-pulse" />
+              <span>Women-Only Boutique Travel Collective</span>
+              <span className="text-gold-400">✦</span>
+              <span className="text-ivory-200">Max 14 Guests</span>
+            </div>
 
-          <p className="mt-3.5 text-base sm:text-lg text-fern-700/90 font-light max-w-2xl mx-auto leading-relaxed">
-            Curated journeys for women who’d rather not put their dreams on hold. 
-            Handpicked boutique stays, certified woman tour leads, and small sisterhood cohorts of 8 to 14.
-          </p>
-        </div>
+            {/* Editorial Title */}
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-tight text-white">
+              Travel Freely. <br />
+              <span className="italic font-light text-gold-400">Travel Safely.</span>{" "}
+              Travel in Style.
+            </h1>
 
-        {/* Destination Pill Navigator */}
-        <div className="mb-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-          {LOCATION_SLIDES.map((dest, idx) => {
-            const isActive = idx === currentIndex;
-            return (
-              <button
-                key={dest.id}
-                onClick={() => triggerKissBreeze(idx)}
-                className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-300 ${
-                  isActive
-                    ? "bg-fern-800 text-ivory-100 shadow-md shadow-fern-900/25 ring-2 ring-gold-500/50 scale-105"
-                    : "bg-white/80 text-fern-800 hover:bg-white hover:text-gold-600 border border-gold-500/20"
-                }`}
-              >
-                <span>{dest.name}</span>
-                {isActive && (
-                  <span className="rounded-full bg-gold-500 px-1.5 py-0.5 text-[10px] font-semibold text-fern-900">
-                    {dest.seatsLeft} spots
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
+            <p className="text-sm sm:text-base text-ivory-200/90 font-light max-w-xl leading-relaxed">
+              Thoughtfully curated journeys for women who’d rather not put their dreams on hold. 
+              Handpicked boutique stays, certified female tour leaders, and small sisterhood cohorts of 8 to 14.
+            </p>
 
-        {/* MAIN CINEMATIC HERO STAGE */}
-        <div
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
-          className="relative mx-auto max-w-6xl rounded-3xl overflow-hidden border border-gold-500/30 shadow-2xl cut-paper-3 bg-fern-950"
-        >
-          {/* Background Location Photo & Cut-Paper Shifting Layer */}
-          <div className="relative h-[580px] sm:h-[640px] w-full overflow-hidden">
-            {/* Smooth Dissolve Backgrounds */}
-            {LOCATION_SLIDES.map((slide, idx) => (
-              <div
-                key={slide.id}
-                className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-                  idx === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-                }`}
-                style={{ backgroundImage: `url(${slide.photoUrl})` }}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-r ${slide.bgGradient}`} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
-              </div>
-            ))}
-
-            {/* TOP BAR OVERLAY: Location Pill + Soundscape + Autoplay Toggle */}
-            <div className="absolute top-6 left-6 right-6 z-30 flex items-center justify-between">
-              <div className="flex items-center gap-2 sm:gap-3">
-                <div className="flex items-center gap-1.5 rounded-full bg-black/60 backdrop-blur-md px-3.5 py-1.5 text-xs font-semibold text-ivory-100 border border-gold-500/30">
+            {/* FLOATING LOCATION BOARDING PASS (SmartDuke Meridian Aesthetic) */}
+            <div className="w-full max-w-xl rounded-2xl bg-black/60 backdrop-blur-xl border border-gold-500/30 p-5 sm:p-6 shadow-2xl cut-paper-2">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 mb-3">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-gold-300">
                   <MapPin className="h-3.5 w-3.5 text-gold-400" />
                   <span>{currentSlide.name}</span>
-                  <span className="text-white/40">•</span>
-                  <span className="text-gold-300 font-light">{currentSlide.stateOrCountry}</span>
+                  <span className="text-white/30">•</span>
+                  <span>{currentSlide.stateOrCountry}</span>
                 </div>
-                <div className="hidden sm:block">
+                <div className="flex items-center gap-3">
+                  <span className="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[11px] font-medium text-emerald-300 border border-emerald-500/30">
+                    {currentSlide.temperature}
+                  </span>
                   <SoundscapePlayer destinationName={currentSlide.name} />
                 </div>
               </div>
 
-              {/* Progress & Pause Button */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                  title={isAutoPlaying ? "Pause slideshow" : "Play slideshow"}
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-gold-300 hover:text-white backdrop-blur-md border border-gold-500/30 transition-colors"
-                >
-                  {isAutoPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
-                </button>
-                <div className="hidden md:flex items-center gap-1.5 text-xs text-ivory-200 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-gold-500/20">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-                  <span>{currentSlide.temperature}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* THE WOMAN BLOWING PETALS & FERNS (EDITORIAL HERO CENTERPIECE) */}
-            <div className="absolute inset-0 z-20 flex items-center justify-between pointer-events-none px-4 sm:px-12">
-              {/* Left Side: The Graceful Woman with Petals & Ferns on Her Palm */}
-              <div className="relative pointer-events-auto max-w-sm sm:max-w-md mt-auto pb-6 sm:pb-12">
-                {/* Visual Card of the Woman Blowing Petals */}
-                <div className="relative group">
-                  {/* Subtle Aura Halo */}
-                  <div
-                    className={`absolute -inset-2 rounded-3xl bg-gradient-to-r from-gold-500/20 to-fern-500/20 blur-xl transition-opacity duration-700 ${
-                      isBlowing ? "opacity-100 scale-105" : "opacity-50"
-                    }`}
-                  />
-
-                  {/* Cutout Portrait Container */}
-                  <div className="relative rounded-3xl overflow-hidden border-2 border-gold-400/50 shadow-2xl cut-paper-2 bg-fern-900/40 backdrop-blur-sm">
-                    <img
-                      src="/brand/woman_blowing_petals.jpg"
-                      alt="Woman blowing delicate fern fronds and petals into the breeze"
-                      className={`h-72 sm:h-96 w-full object-cover object-top transition-transform duration-700 ${
-                        isBlowing ? "scale-105" : "group-hover:scale-102"
-                      }`}
-                    />
-
-                    {/* Gradient Overlay for Text Readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-fern-950 via-transparent to-transparent opacity-90" />
-
-                    {/* Floating Palm Interaction Hint */}
-                    <div className="absolute bottom-4 left-4 right-4 text-center">
-                      <button
-                        onClick={() => triggerKissBreeze()}
-                        className="group/btn relative inline-flex items-center gap-2 rounded-full bg-gold-500 px-4 py-2 text-xs font-semibold text-fern-950 shadow-lg hover:bg-gold-400 active:scale-95 transition-all"
-                      >
-                        <Wind className="h-3.5 w-3.5 animate-spin" />
-                        <span>Blow Petals & Change Horizon</span>
-                        <span className="text-fern-900 font-bold">✦</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Side: The Destination Story & Horizon Details Card */}
-              <div className="relative pointer-events-auto max-w-md lg:max-w-lg text-ivory-100 bg-black/60 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-gold-500/30 shadow-2xl ml-auto mt-16 sm:mt-0">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-gold-400 mb-2">
-                  <Compass className="h-3.5 w-3.5" />
-                  <span>HORIZON {currentIndex + 1} OF {LOCATION_SLIDES.length}</span>
-                </div>
-
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white leading-tight">
-                  {currentSlide.name}
-                </h2>
-                <p className="font-serif italic text-sm sm:text-base text-gold-300 mt-1">
-                  "{currentSlide.tagline}"
-                </p>
-
-                <p className="mt-3.5 text-xs sm:text-sm text-ivory-200/90 leading-relaxed font-light">
+              <div>
+                <h3 className="font-serif text-2xl font-medium text-white">
+                  {currentSlide.tagline}
+                </h3>
+                <p className="mt-1.5 text-xs sm:text-sm text-ivory-300 font-light leading-relaxed">
                   {currentSlide.description}
                 </p>
+              </div>
 
-                {/* Highlights tags */}
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {currentSlide.highlights.slice(0, 3).map((h, i) => (
-                    <span
-                      key={i}
-                      className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-medium text-ivory-200 border border-white/10"
-                    >
-                      <CheckCircle2 className="h-3 w-3 text-gold-400" />
-                      <span>{h}</span>
-                    </span>
-                  ))}
-                </div>
+              {/* Highlights tags */}
+              <div className="mt-3.5 flex flex-wrap gap-1.5">
+                {currentSlide.highlights.slice(0, 3).map((h, i) => (
+                  <span
+                    key={i}
+                    className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-0.5 text-[10px] sm:text-[11px] font-medium text-ivory-200"
+                  >
+                    <CheckCircle2 className="h-3 w-3 text-gold-400" />
+                    <span>{h}</span>
+                  </span>
+                ))}
+              </div>
 
-                {/* Pricing & Booking Row */}
-                <div className="mt-6 pt-5 border-t border-white/15 flex flex-wrap items-center justify-between gap-4">
-                  <div>
-                    <span className="text-[10px] text-ivory-300 uppercase tracking-wider block">
-                      All-Inclusive Package
-                    </span>
+              {/* Pricing, Seats & CTAs */}
+              <div className="mt-5 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <span className="text-[10px] text-ivory-300 uppercase tracking-wider block">
+                    All-Inclusive • {currentSlide.dates}
+                  </span>
+                  <div className="flex items-baseline gap-2">
                     <span className="font-serif text-2xl font-bold text-gold-400">
                       {currentSlide.price}
                     </span>
-                    <span className="text-[11px] text-ivory-300 ml-1.5 font-light">
-                      ({currentSlide.dates})
+                    <span className="rounded-full bg-gold-500/20 text-gold-300 px-2 py-0.5 text-[10px] font-semibold border border-gold-500/40">
+                      Only {currentSlide.seatsLeft} seats left
                     </span>
                   </div>
+                </div>
 
-                  <div className="flex items-center gap-2">
-                    <a
-                      href={`https://wa.me/917999919170?text=Hi%20Pallavi%2C%20I%20saw%20the%20${encodeURIComponent(
-                        currentSlide.name
-                      )}%20journey%20on%20the%20website%20and%20would%20love%20to%20reserve%20a%20seat!`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-2.5 text-xs font-semibold text-white shadow-md hover:bg-emerald-500 transition-all hover:scale-105"
-                    >
-                      <MessageCircle className="h-3.5 w-3.5" />
-                      <span>Reserve Seat</span>
-                    </a>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={`https://wa.me/917999919170?text=Hi%20Pallavi%2C%20I%20saw%20the%20${encodeURIComponent(
+                      currentSlide.name
+                    )}%20journey%20on%20the%20website%20and%20would%20love%20to%20reserve%20a%20seat!`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-2.5 text-xs font-semibold text-white shadow-md hover:bg-emerald-500 transition-all hover:scale-105"
+                  >
+                    <MessageCircle className="h-3.5 w-3.5" />
+                    <span>Reserve via WhatsApp</span>
+                  </a>
 
-                    <a
-                      href="#trips"
-                      className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-white/20 text-white hover:bg-gold-500 hover:text-fern-900 transition-colors"
-                      title="View Full Day-by-Day Itinerary"
-                    >
-                      <ArrowRight className="h-4 w-4" />
-                    </a>
-                  </div>
+                  <a
+                    href="#trips"
+                    className="inline-flex items-center justify-center rounded-full border border-gold-500/30 bg-white/10 px-4 py-2.5 text-xs font-medium text-ivory-100 hover:bg-white hover:text-fern-900 transition-all"
+                  >
+                    <span>Itinerary</span>
+                    <ArrowRight className="h-3.5 w-3.5 ml-1" />
+                  </a>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-            {/* Slider Navigation Chevrons */}
-            <div className="absolute inset-y-0 left-3 sm:left-4 z-30 flex items-center pointer-events-none">
+      {/* 
+        ========================================================================
+        4. BOTTOM DESTINATION SELECTOR BAR & AUTOPLAY PROGRESS
+        ========================================================================
+      */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20 pt-6">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-4">
+          {/* Destination Navigator Pills */}
+          <div className="flex flex-wrap items-center gap-2">
+            {LOCATION_SLIDES.map((dest, idx) => {
+              const isActive = idx === currentIndex;
+              return (
+                <button
+                  key={dest.id}
+                  onClick={() => triggerKissBreeze(idx)}
+                  className={`flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-300 ${
+                    isActive
+                      ? "bg-gold-500 text-fern-950 font-semibold shadow-md ring-2 ring-gold-400 scale-105"
+                      : "bg-black/40 text-ivory-200 hover:bg-white/20 hover:text-white border border-white/10"
+                  }`}
+                >
+                  <span className="font-mono text-[10px] text-white/60">0{idx + 1}</span>
+                  <span>{dest.name}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Autoplay status & Navigation arrows */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+              className="flex items-center gap-1.5 text-[11px] text-ivory-300 hover:text-white bg-black/40 px-3 py-1 rounded-full border border-white/10"
+            >
+              {isAutoPlaying ? (
+                <>
+                  <Pause className="h-3 w-3 text-gold-400" />
+                  <span>Auto-Playing (6s)</span>
+                </>
+              ) : (
+                <>
+                  <Play className="h-3 w-3 text-gold-400" />
+                  <span>Paused</span>
+                </>
+              )}
+            </button>
+
+            <div className="flex items-center gap-1.5">
               <button
                 onClick={handlePrev}
-                className="pointer-events-auto h-11 w-11 rounded-full bg-black/50 text-white hover:bg-gold-500 hover:text-fern-900 backdrop-blur-md border border-gold-500/30 flex items-center justify-center transition-all hover:scale-110 shadow-lg"
+                className="h-8 w-8 rounded-full bg-black/40 text-white hover:bg-gold-500 hover:text-fern-950 flex items-center justify-center border border-white/10 transition-all"
                 aria-label="Previous destination"
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ChevronLeft className="h-4 w-4" />
               </button>
-            </div>
-
-            <div className="absolute inset-y-0 right-3 sm:right-4 z-30 flex items-center pointer-events-none">
               <button
                 onClick={handleNext}
-                className="pointer-events-auto h-11 w-11 rounded-full bg-black/50 text-white hover:bg-gold-500 hover:text-fern-900 backdrop-blur-md border border-gold-500/30 flex items-center justify-center transition-all hover:scale-110 shadow-lg"
+                className="h-8 w-8 rounded-full bg-black/40 text-white hover:bg-gold-500 hover:text-fern-950 flex items-center justify-center border border-white/10 transition-all"
                 aria-label="Next destination"
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-4 w-4" />
               </button>
-            </div>
-
-            {/* Dwell Progress Bar at Bottom of Slider */}
-            <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-white/20 z-30">
-              <div
-                className="h-full bg-gold-500 transition-all duration-75"
-                style={{ width: `${progress}%` }}
-              />
             </div>
           </div>
         </div>
 
-        {/* Bottom Social Proof Bar */}
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-fern-800 border-t border-gold-500/20 pt-4">
-          <div className="flex items-center gap-2">
-            <span className="flex text-gold-500">★★★★★</span>
-            <span className="font-semibold text-fern-900">4.98 / 5.0</span>
-            <span className="text-fern-600">from 80+ solo women travelers across India</span>
-          </div>
-
-          <div className="flex items-center gap-4 text-fern-700">
-            <span className="flex items-center gap-1.5">
-              <Sparkles className="h-3.5 w-3.5 text-gold-500" />
-              <span>Max 14 Guests per Cohort</span>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <HeartHandshake className="h-3.5 w-3.5 text-gold-500" />
-              <span>100% Female Founded & Led</span>
-            </span>
-          </div>
+        {/* Minimalist Progress Bar Spanning Full Screen Bottom */}
+        <div className="mt-3 w-full bg-white/10 h-1 rounded-full overflow-hidden">
+          <div
+            className="bg-gold-400 h-full transition-all duration-75"
+            style={{ width: `${progress}%` }}
+          />
         </div>
       </div>
     </section>

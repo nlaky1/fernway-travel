@@ -28,7 +28,7 @@ export default function TrustStrip() {
   ];
 
   return (
-    <section className="relative z-30 -mt-6 sm:-mt-8 container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative z-30 -mt-10 sm:-mt-12 container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="rounded-2xl border border-gold-500/30 bg-white/95 p-6 sm:p-8 shadow-xl backdrop-blur-md">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 divide-y sm:divide-y-0 lg:divide-x divide-gold-500/20">
           {promises.map((p, idx) => {
