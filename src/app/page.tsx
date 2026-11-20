@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
-import HeroViewfinder from "@/components/HeroViewfinder";
+import HeroBlowingPetalsSlider from "@/components/HeroBlowingPetalsSlider";
 import TrustStrip from "@/components/TrustStrip";
 import BrandPillars from "@/components/BrandPillars";
 import TripShowcase from "@/components/TripShowcase";
@@ -19,8 +19,8 @@ export default function Home() {
       {/* Top Header & Navigation */}
       <Navbar />
 
-      {/* The Requested Hero Experience: Woman Traveler, Smartphone Viewfinder, Shifting Scenarios & Petal Physics */}
-      <HeroViewfinder />
+      {/* The Requested Womancentric Hero Slider: Woman Blowing Kiss with Ferns & Petals, Shifting Locations */}
+      <HeroBlowingPetalsSlider />
 
       {/* Key Trust Signals */}
       <TrustStrip />
