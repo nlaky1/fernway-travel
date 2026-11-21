@@ -15,8 +15,6 @@ import {
   CheckCircle2,
   Pause,
   Play,
-  HeartHandshake,
-  ShieldCheck,
 } from "lucide-react";
 
 interface LocationSlide {
@@ -31,8 +29,6 @@ interface LocationSlide {
   seatsLeft: number;
   temperature: string;
   vibe: string;
-  accentColor: string;
-  bgGradient: string;
   photoUrl: string;
   highlights: string[];
 }
@@ -51,8 +47,6 @@ const LOCATION_SLIDES: LocationSlide[] = [
     seatsLeft: 4,
     temperature: "19°C • Misty Rainforest",
     vibe: "Rainforest canopy, double-decker living root bridges & glass riverboats",
-    accentColor: "#36765B",
-    bgGradient: "from-black/85 via-black/50 to-black/80",
     photoUrl: "https://images.unsplash.com/photo-1626014303757-6466336e4f3a?auto=format&fit=crop&w=1600&q=80",
     highlights: ["Double Decker Living Root Bridge", "Wei Sawdong 3-Tier Falls", "Dawki Transparent Waters", "Private Khasi Dinner"],
   },
@@ -62,15 +56,13 @@ const LOCATION_SLIDES: LocationSlide[] = [
     stateOrCountry: "Western India",
     tagline: "Palaces, Golden Dunes & Desert Glamour",
     description:
-      "Amber sandstone ramparts, private palace rooftop dining, starlit luxury desert glamping at Sam Dunes, and folk music soirées.",
+      "Amber sandstone citadels, private palace rooftop dining, starlit luxury desert glamping at Sam Dunes, and folk music soirées.",
     dates: "November 12 – 18, 2026",
     price: "₹48,000",
     deposit: "₹12,000",
     seatsLeft: 5,
     temperature: "26°C • Golden Sunset",
     vibe: "Sandstone havelis, luxury desert glamping & private royal high tea",
-    accentColor: "#B8894A",
-    bgGradient: "from-black/85 via-black/50 to-black/80",
     photoUrl: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1600&q=80",
     highlights: ["Jaisalmer Fort Private Walk", "Sam Sand Dunes Royal Glamping", "Jodhpur Blue City Rooftops", "Campfire Kalbelia Dance"],
   },
@@ -87,8 +79,6 @@ const LOCATION_SLIDES: LocationSlide[] = [
     seatsLeft: 6,
     temperature: "15°C • Crisp Mountain Air",
     vibe: "Floating lake markets, cedar heritage houseboats & pine meadows",
-    accentColor: "#4A6E82",
-    bgGradient: "from-black/85 via-black/50 to-black/80",
     photoUrl: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1600&q=80",
     highlights: ["Dal Lake Luxury Houseboat", "Pahalgam Betaab Valley Walk", "Pampore Saffron High Tea", "Sunset Shikara Cruise"],
   },
@@ -105,8 +95,6 @@ const LOCATION_SLIDES: LocationSlide[] = [
     seatsLeft: 3,
     temperature: "27°C • Tropical Sun",
     vibe: "Private pool villas, organic herbal spas & Indian Ocean dusk",
-    accentColor: "#5C8C67",
-    bgGradient: "from-black/85 via-black/50 to-black/80",
     photoUrl: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1600&q=80",
     highlights: ["Ubud Sacred Sanctuary", "Sound Bath at Pyramids of Chi", "Private Luxury Pool Villa", "Jimbaran Beach Dinner"],
   },
@@ -123,8 +111,6 @@ const LOCATION_SLIDES: LocationSlide[] = [
     seatsLeft: 5,
     temperature: "25°C • Lantern Glow",
     vibe: "Luxury Halong cruise suites & lantern-lit ancient canal walks",
-    accentColor: "#C16B45",
-    bgGradient: "from-black/85 via-black/50 to-black/80",
     photoUrl: "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1600&q=80",
     highlights: ["Halong Bay Luxury Suite Cruise", "Hoi An Silk Tailoring Walk", "Ba Na Hills Golden Bridge", "Hanoi Old Quarter"],
   },
@@ -188,10 +174,10 @@ export default function HeroBlowingPetalsSlider() {
   }, [isAutoPlaying, currentIndex]);
 
   return (
-    <section className="relative min-h-[94vh] lg:min-h-screen w-full overflow-hidden bg-fern-950 text-ivory-100 flex flex-col justify-between pt-36 pb-10">
+    <section className="relative min-h-[94vh] lg:min-h-screen w-full overflow-hidden bg-ivory-100 text-fern-950 flex flex-col justify-between pt-36 pb-12 transition-colors duration-700">
       {/* 
         ========================================================================
-        1. THE FULL BLEED BACKGROUND SLIDER (Location Panoramas taking 100% screen)
+        1. THE FULL BLEED BACKGROUND SLIDER (Lighter Theme Sun-Drenched Panoramas)
         ========================================================================
       */}
       <div className="absolute inset-0 z-0">
@@ -203,10 +189,10 @@ export default function HeroBlowingPetalsSlider() {
             }`}
             style={{ backgroundImage: `url(${slide.photoUrl})` }}
           >
-            {/* Cinematic Multilayer Vignettes so text and foreground remain crystal clear */}
-            <div className={`absolute inset-0 bg-gradient-to-r ${slide.bgGradient}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-fern-950 via-black/30 to-black/60" />
-            <div className="absolute inset-0 bg-radial-vignette opacity-60" />
+            {/* Lighter Theme Warm Ivory Editorial Overlays */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#FAF7F2] via-[#FAF7F2]/85 to-[#FAF7F2]/40 lg:via-[#FAF7F2]/80 lg:to-[#FAF7F2]/25" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-transparent to-[#FAF7F2]/50" />
+            <div className="absolute inset-0 bg-[#F6F1E7]/20 mix-blend-multiply" />
           </div>
         ))}
       </div>
@@ -231,13 +217,13 @@ export default function HeroBlowingPetalsSlider() {
             <div className="relative group">
               {/* Outer Golden Aura Glow */}
               <div
-                className={`absolute -inset-3 rounded-full bg-gradient-to-tr from-gold-500/30 to-fern-400/30 blur-2xl transition-all duration-700 ${
-                  isBlowing ? "opacity-100 scale-110" : "opacity-60 scale-100"
+                className={`absolute -inset-3 rounded-full bg-gradient-to-tr from-gold-500/25 to-sage-400/25 blur-2xl transition-all duration-700 ${
+                  isBlowing ? "opacity-100 scale-110" : "opacity-50 scale-100"
                 }`}
               />
 
               {/* Luxury Archway Cameo with Gold Foil Rim */}
-              <div className="relative w-64 sm:w-72 md:w-80 h-80 sm:h-96 rounded-t-full rounded-b-3xl overflow-hidden border-2 border-gold-400/60 shadow-2xl cut-paper-3 bg-fern-900/40 backdrop-blur-sm">
+              <div className="relative w-64 sm:w-72 md:w-80 h-80 sm:h-96 rounded-t-full rounded-b-3xl overflow-hidden border-2 border-gold-400/80 shadow-2xl cut-paper-3 bg-white/60 backdrop-blur-sm">
                 <img
                   src="/brand/woman_blowing_petals.jpg"
                   alt="Woman gently blowing ferns and petals into the horizon"
@@ -247,15 +233,15 @@ export default function HeroBlowingPetalsSlider() {
                 />
 
                 {/* Soft gradient bottom vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-fern-950 via-transparent to-transparent opacity-85" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ivory-100/90 via-transparent to-transparent opacity-80" />
 
                 {/* Interactive Breathing Palm Button */}
                 <div className="absolute bottom-4 left-3 right-3 text-center">
                   <button
                     onClick={() => triggerKissBreeze()}
-                    className="group/btn relative inline-flex items-center gap-2 rounded-full bg-gold-500 px-4 py-2 text-xs font-semibold text-fern-950 shadow-lg hover:bg-gold-400 active:scale-95 transition-all"
+                    className="group/btn relative inline-flex items-center gap-2 rounded-full bg-gold-500 px-4 py-2 text-xs font-semibold text-fern-950 shadow-md hover:bg-gold-400 active:scale-95 transition-all"
                   >
-                    <Wind className="h-3.5 w-3.5 animate-spin" />
+                    <Wind className="h-3.5 w-3.5 animate-spin text-fern-900" />
                     <span>Blow Petals &amp; Discover</span>
                     <span className="text-fern-950 font-bold">✦</span>
                   </button>
@@ -263,46 +249,46 @@ export default function HeroBlowingPetalsSlider() {
               </div>
 
               {/* Reassuring Sisterhood Tag */}
-              <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-black/60 backdrop-blur-md px-3.5 py-1 text-xs text-gold-300 border border-gold-500/30">
-                <Sparkles className="h-3.5 w-3.5 text-gold-400" />
-                <span className="font-medium">Solo, Not Alone • All-Women Cohorts</span>
+              <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur-md px-4 py-1.5 text-xs text-fern-800 border border-gold-500/30 shadow-sm">
+                <Sparkles className="h-3.5 w-3.5 text-gold-500" />
+                <span className="font-medium">Solo, Not Alone • Small Cohorts</span>
               </div>
             </div>
           </div>
 
-          {/* RIGHT: Editorial Headline & Floating Destination Pass (SmartDuke Style) */}
+          {/* RIGHT: Editorial Headline & Floating Destination Pass (Light Luxury Theme) */}
           <div className="lg:col-span-7 flex flex-col items-start space-y-6">
             {/* Top Category Tag */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-black/40 px-3.5 py-1 text-xs font-medium uppercase tracking-[0.2em] text-gold-300 backdrop-blur-md">
-              <span className="flex h-1.5 w-1.5 rounded-full bg-gold-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-white/85 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-fern-800 backdrop-blur-md shadow-sm">
+              <span className="flex h-1.5 w-1.5 rounded-full bg-gold-500 animate-pulse" />
               <span>Women-Only Boutique Travel Collective</span>
-              <span className="text-gold-400">✦</span>
-              <span className="text-ivory-200">Max 14 Guests</span>
+              <span className="text-gold-500">✦</span>
+              <span className="text-fern-600 font-normal">Max 14 Guests</span>
             </div>
 
             {/* Editorial Title */}
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-tight text-white">
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-tight text-fern-950">
               Travel Freely. <br />
-              <span className="italic font-light text-gold-400">Travel Safely.</span>{" "}
+              <span className="italic font-light text-gold-600">Travel Safely.</span>{" "}
               Travel in Style.
             </h1>
 
-            <p className="text-sm sm:text-base text-ivory-200/90 font-light max-w-xl leading-relaxed">
+            <p className="text-sm sm:text-base text-fern-800/90 font-light max-w-xl leading-relaxed">
               Thoughtfully curated journeys for women who’d rather not put their dreams on hold. 
               Handpicked boutique stays, certified female tour leaders, and small sisterhood cohorts of 8 to 14.
             </p>
 
-            {/* FLOATING LOCATION BOARDING PASS (SmartDuke Meridian Aesthetic) */}
-            <div className="w-full max-w-xl rounded-2xl bg-black/60 backdrop-blur-xl border border-gold-500/30 p-5 sm:p-6 shadow-2xl cut-paper-2">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3 mb-3">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-gold-300">
-                  <MapPin className="h-3.5 w-3.5 text-gold-400" />
+            {/* FLOATING LOCATION BOARDING PASS (Lighter Pearl Glass Aesthetic) */}
+            <div className="w-full max-w-xl rounded-2xl bg-white/90 backdrop-blur-xl border border-gold-500/30 p-5 sm:p-6 shadow-2xl cut-paper-2 text-fern-950">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gold-500/15 pb-3 mb-3">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-gold-700 font-semibold">
+                  <MapPin className="h-3.5 w-3.5 text-gold-600" />
                   <span>{currentSlide.name}</span>
-                  <span className="text-white/30">•</span>
+                  <span className="text-fern-300">•</span>
                   <span>{currentSlide.stateOrCountry}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[11px] font-medium text-emerald-300 border border-emerald-500/30">
+                  <span className="rounded-full bg-sage-100 text-sage-800 px-2.5 py-0.5 text-[11px] font-medium border border-sage-200">
                     {currentSlide.temperature}
                   </span>
                   <SoundscapePlayer destinationName={currentSlide.name} />
@@ -310,10 +296,10 @@ export default function HeroBlowingPetalsSlider() {
               </div>
 
               <div>
-                <h3 className="font-serif text-2xl font-medium text-white">
+                <h3 className="font-serif text-2xl font-medium text-fern-950">
                   {currentSlide.tagline}
                 </h3>
-                <p className="mt-1.5 text-xs sm:text-sm text-ivory-300 font-light leading-relaxed">
+                <p className="mt-1.5 text-xs sm:text-sm text-fern-700 font-light leading-relaxed">
                   {currentSlide.description}
                 </p>
               </div>
@@ -323,25 +309,25 @@ export default function HeroBlowingPetalsSlider() {
                 {currentSlide.highlights.slice(0, 3).map((h, i) => (
                   <span
                     key={i}
-                    className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-0.5 text-[10px] sm:text-[11px] font-medium text-ivory-200"
+                    className="inline-flex items-center gap-1 rounded-full bg-ivory-100/90 px-2.5 py-0.5 text-[10px] sm:text-[11px] font-medium text-fern-800 border border-gold-500/20"
                   >
-                    <CheckCircle2 className="h-3 w-3 text-gold-400" />
+                    <CheckCircle2 className="h-3 w-3 text-gold-600" />
                     <span>{h}</span>
                   </span>
                 ))}
               </div>
 
               {/* Pricing, Seats & CTAs */}
-              <div className="mt-5 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+              <div className="mt-5 pt-4 border-t border-gold-500/15 flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <span className="text-[10px] text-ivory-300 uppercase tracking-wider block">
+                  <span className="text-[10px] text-fern-600 uppercase tracking-wider block font-medium">
                     All-Inclusive • {currentSlide.dates}
                   </span>
                   <div className="flex items-baseline gap-2">
-                    <span className="font-serif text-2xl font-bold text-gold-400">
+                    <span className="font-serif text-2xl font-bold text-fern-950">
                       {currentSlide.price}
                     </span>
-                    <span className="rounded-full bg-gold-500/20 text-gold-300 px-2 py-0.5 text-[10px] font-semibold border border-gold-500/40">
+                    <span className="rounded-full bg-gold-100 text-gold-800 px-2.5 py-0.5 text-[10px] font-semibold border border-gold-300">
                       Only {currentSlide.seatsLeft} seats left
                     </span>
                   </div>
@@ -354,7 +340,7 @@ export default function HeroBlowingPetalsSlider() {
                     )}%20journey%20on%20the%20website%20and%20would%20love%20to%20reserve%20a%20seat!`}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-2.5 text-xs font-semibold text-white shadow-md hover:bg-emerald-500 transition-all hover:scale-105"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-emerald-700 px-4 py-2.5 text-xs font-semibold text-white shadow-md hover:bg-emerald-800 transition-all hover:scale-105"
                   >
                     <MessageCircle className="h-3.5 w-3.5" />
                     <span>Reserve via WhatsApp</span>
@@ -362,7 +348,7 @@ export default function HeroBlowingPetalsSlider() {
 
                   <a
                     href="#trips"
-                    className="inline-flex items-center justify-center rounded-full border border-gold-500/30 bg-white/10 px-4 py-2.5 text-xs font-medium text-ivory-100 hover:bg-white hover:text-fern-900 transition-all"
+                    className="inline-flex items-center justify-center rounded-full border border-fern-800/20 bg-white px-4 py-2.5 text-xs font-medium text-fern-900 hover:bg-fern-800 hover:text-white transition-all shadow-sm"
                   >
                     <span>Itinerary</span>
                     <ArrowRight className="h-3.5 w-3.5 ml-1" />
@@ -376,11 +362,11 @@ export default function HeroBlowingPetalsSlider() {
 
       {/* 
         ========================================================================
-        4. BOTTOM DESTINATION SELECTOR BAR & AUTOPLAY PROGRESS
+        4. BOTTOM DESTINATION SELECTOR BAR & AUTOPLAY PROGRESS (Light Theme)
         ========================================================================
       */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20 pt-6">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-4">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-gold-500/20 pt-4">
           {/* Destination Navigator Pills */}
           <div className="flex flex-wrap items-center gap-2">
             {LOCATION_SLIDES.map((dest, idx) => {
@@ -391,11 +377,13 @@ export default function HeroBlowingPetalsSlider() {
                   onClick={() => triggerKissBreeze(idx)}
                   className={`flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-300 ${
                     isActive
-                      ? "bg-gold-500 text-fern-950 font-semibold shadow-md ring-2 ring-gold-400 scale-105"
-                      : "bg-black/40 text-ivory-200 hover:bg-white/20 hover:text-white border border-white/10"
+                      ? "bg-fern-800 text-ivory-100 font-semibold shadow-md ring-2 ring-gold-500 scale-105"
+                      : "bg-white/85 text-fern-800 hover:bg-white hover:text-gold-600 border border-gold-500/20 shadow-sm"
                   }`}
                 >
-                  <span className="font-mono text-[10px] text-white/60">0{idx + 1}</span>
+                  <span className={`font-mono text-[10px] ${isActive ? "text-gold-400" : "text-fern-500"}`}>
+                    0{idx + 1}
+                  </span>
                   <span>{dest.name}</span>
                 </button>
               );
@@ -406,16 +394,16 @@ export default function HeroBlowingPetalsSlider() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-              className="flex items-center gap-1.5 text-[11px] text-ivory-300 hover:text-white bg-black/40 px-3 py-1 rounded-full border border-white/10"
+              className="flex items-center gap-1.5 text-[11px] text-fern-700 hover:text-fern-900 bg-white/80 px-3 py-1 rounded-full border border-gold-500/20 shadow-sm"
             >
               {isAutoPlaying ? (
                 <>
-                  <Pause className="h-3 w-3 text-gold-400" />
+                  <Pause className="h-3 w-3 text-gold-600" />
                   <span>Auto-Playing (6s)</span>
                 </>
               ) : (
                 <>
-                  <Play className="h-3 w-3 text-gold-400" />
+                  <Play className="h-3 w-3 text-gold-600" />
                   <span>Paused</span>
                 </>
               )}
@@ -424,14 +412,14 @@ export default function HeroBlowingPetalsSlider() {
             <div className="flex items-center gap-1.5">
               <button
                 onClick={handlePrev}
-                className="h-8 w-8 rounded-full bg-black/40 text-white hover:bg-gold-500 hover:text-fern-950 flex items-center justify-center border border-white/10 transition-all"
+                className="h-8 w-8 rounded-full bg-white/80 text-fern-800 hover:bg-gold-500 hover:text-fern-950 flex items-center justify-center border border-gold-500/20 transition-all shadow-sm"
                 aria-label="Previous destination"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
               <button
                 onClick={handleNext}
-                className="h-8 w-8 rounded-full bg-black/40 text-white hover:bg-gold-500 hover:text-fern-950 flex items-center justify-center border border-white/10 transition-all"
+                className="h-8 w-8 rounded-full bg-white/80 text-fern-800 hover:bg-gold-500 hover:text-fern-950 flex items-center justify-center border border-gold-500/20 transition-all shadow-sm"
                 aria-label="Next destination"
               >
                 <ChevronRight className="h-4 w-4" />
@@ -441,9 +429,9 @@ export default function HeroBlowingPetalsSlider() {
         </div>
 
         {/* Minimalist Progress Bar Spanning Full Screen Bottom */}
-        <div className="mt-3 w-full bg-white/10 h-1 rounded-full overflow-hidden">
+        <div className="mt-3 w-full bg-gold-500/15 h-1 rounded-full overflow-hidden">
           <div
-            className="bg-gold-400 h-full transition-all duration-75"
+            className="bg-gold-500 h-full transition-all duration-75"
             style={{ width: `${progress}%` }}
           />
         </div>

@@ -61,29 +61,29 @@ export default function SafetyCharter() {
   ];
 
   return (
-    <section id="safety" className="py-24 bg-fern-900 text-ivory-100 relative overflow-hidden">
+    <section id="safety" className="py-24 bg-[#F8F5EE] text-fern-950 relative overflow-hidden transition-colors duration-700">
       {/* Decorative Gold Leaf Flourish */}
       <div className="absolute top-0 right-0 -mr-20 -mt-20 h-80 w-80 rounded-full bg-gold-500/10 blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 -ml-20 -mb-20 h-80 w-80 rounded-full bg-sage-500/10 blur-3xl pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-fern-800/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-300 backdrop-blur-sm mb-3">
-            <ShieldCheck className="h-4 w-4 text-gold-400" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-white/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-fern-800 backdrop-blur-sm mb-3 shadow-sm">
+            <ShieldCheck className="h-4 w-4 text-gold-600" />
             <span>The Fernway Guarantee</span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-ivory-100">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-fern-950">
             Zero-Compromise Safety Charter
           </h2>
 
-          <p className="mt-4 text-sm sm:text-base text-ivory-200/90 font-light leading-relaxed">
-            Safety isn't an afterthought or a marketing buzzword for us — it is the very foundation
+          <p className="mt-4 text-sm sm:text-base text-fern-800/80 font-light leading-relaxed">
+            Safety isn&apos;t an afterthought or a marketing buzzword for us — it is the very foundation
             upon which Fernway was created. Here is our six-point sacred promise to you and your family.
           </p>
         </div>
 
-        {/* Safety Protocol Accordion Grid */}
+        {/* Safety Protocol Accordion Grid (Light Theme) */}
         <div className="max-w-4xl mx-auto space-y-4">
           {protocols.map((p, idx) => {
             const Icon = p.icon;
@@ -92,27 +92,27 @@ export default function SafetyCharter() {
             return (
               <div
                 key={idx}
-                className="rounded-2xl border border-gold-500/20 bg-fern-800/60 overflow-hidden backdrop-blur-md transition-all duration-300"
+                className="rounded-2xl border border-gold-500/25 bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : idx)}
                   className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-fern-700 text-gold-400 border border-gold-500/30 flex-shrink-0">
+                    <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-fern-50 text-gold-600 border border-gold-500/25 flex-shrink-0 shadow-sm">
                       <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </div>
                     <div>
-                      <h3 className="font-serif text-lg sm:text-xl font-medium text-ivory-100">
+                      <h3 className="font-serif text-lg sm:text-xl font-medium text-fern-950">
                         {p.title}
                       </h3>
-                      <p className="text-xs text-gold-300/80 mt-0.5 font-light">{p.short}</p>
+                      <p className="text-xs text-gold-700 mt-0.5 font-light">{p.short}</p>
                     </div>
                   </div>
 
                   <div
-                    className={`flex h-8 w-8 items-center justify-center rounded-full bg-fern-700 text-gold-400 transition-transform duration-300 flex-shrink-0 ${
-                      isOpen ? "rotate-180" : ""
+                    className={`flex h-8 w-8 items-center justify-center rounded-full bg-ivory-100 text-fern-800 transition-transform duration-300 flex-shrink-0 ${
+                      isOpen ? "rotate-180 bg-gold-500 text-fern-950" : ""
                     }`}
                   >
                     <ChevronDown className="h-4 w-4" />
@@ -120,7 +120,7 @@ export default function SafetyCharter() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 sm:px-6 pb-6 pt-2 border-t border-gold-500/10 text-xs sm:text-sm text-ivory-200 font-light leading-relaxed">
+                  <div className="px-5 sm:px-6 pb-6 pt-3 border-t border-gold-500/15 bg-ivory-50/70 text-xs sm:text-sm text-fern-800 font-light leading-relaxed">
                     <p>{p.details}</p>
                   </div>
                 )}
@@ -129,13 +129,13 @@ export default function SafetyCharter() {
           })}
         </div>
 
-        {/* Reassuring Callout */}
-        <div className="mt-14 max-w-xl mx-auto text-center rounded-2xl bg-fern-800/90 border border-gold-500/30 p-6">
-          <Sparkles className="h-5 w-5 text-gold-400 mx-auto mb-2" />
-          <h4 className="font-serif text-lg text-ivory-100 font-medium">
+        {/* Reassuring Callout (Light Theme) */}
+        <div className="mt-14 max-w-xl mx-auto text-center rounded-2xl bg-white border border-gold-500/30 p-6 sm:p-8 shadow-lg">
+          <Sparkles className="h-6 w-6 text-gold-600 mx-auto mb-2" />
+          <h4 className="font-serif text-xl text-fern-950 font-medium">
             Have specific questions or anxiety about travelling solo?
           </h4>
-          <p className="mt-1.5 text-xs text-ivory-200 font-light">
+          <p className="mt-2 text-xs sm:text-sm text-fern-700 font-light leading-relaxed">
             Pallavi personally speaks to every single traveller before confirming their seat.
             Schedule a relaxed 15-minute introductory call.
           </p>
@@ -143,7 +143,7 @@ export default function SafetyCharter() {
             href="https://wa.me/917999919170?text=Hi%20Pallavi%2C%20I%20have%20a%20few%20safety%20questions%20before%20joining%20a%20trip."
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 mt-4 rounded-full bg-gold-500 px-6 py-2.5 text-xs font-semibold text-fern-950 shadow-md hover:bg-gold-400 transition-all"
+            className="inline-flex items-center gap-2 mt-5 rounded-full bg-fern-800 px-6 py-3 text-xs sm:text-sm font-semibold text-ivory-100 shadow-md hover:bg-fern-900 transition-all hover:scale-105"
           >
             <span>Talk with Pallavi (+91 79999 19170)</span>
             <span>→</span>

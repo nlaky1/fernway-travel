@@ -43,14 +43,14 @@ const BlowingPetalCanvas = forwardRef<BlowingPetalCanvasHandle, BlowingPetalCanv
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        // Default to left-center / hand position if not specified
+        // Origin at the woman's cupped hand
         const ox = originX !== undefined ? originX : canvas.width * 0.28;
-        const oy = originY !== undefined ? originY : canvas.height * 0.58;
+        const oy = originY !== undefined ? originY : canvas.height * 0.54;
 
         const burstCount = 65;
         const types: ("jasmine" | "fern" | "goldDust" | "rosePetal")[] = [
-          "jasmine",
           "fern",
+          "jasmine",
           "goldDust",
           "rosePetal",
           "fern",
@@ -58,19 +58,18 @@ const BlowingPetalCanvas = forwardRef<BlowingPetalCanvasHandle, BlowingPetalCanv
         ];
 
         for (let i = 0; i < burstCount; i++) {
-          // Cone angle pointing toward the right and slightly upward/downward
-          const angle = -0.3 + (Math.random() - 0.4) * 0.9;
-          const speed = 4 + Math.random() * 9;
+          const angle = -0.3 + (Math.random() - 0.4) * 0.95;
+          const speed = 4.5 + Math.random() * 8.5;
 
           petalsRef.current.push({
-            x: ox + (Math.random() - 0.5) * 20,
-            y: oy + (Math.random() - 0.5) * 20,
-            size: 9 + Math.random() * 16,
+            x: ox + (Math.random() - 0.5) * 22,
+            y: oy + (Math.random() - 0.5) * 22,
+            size: 10 + Math.random() * 16,
             speedX: Math.cos(angle) * speed * windIntensity,
             speedY: Math.sin(angle) * speed * windIntensity - (0.5 + Math.random() * 1.5),
             rotation: Math.random() * Math.PI * 2,
             rotationSpeed: (Math.random() - 0.5) * 0.08,
-            opacity: 0.85 + Math.random() * 0.15,
+            opacity: 0.9 + Math.random() * 0.1,
             type: types[i % types.length],
             flip: Math.random() * Math.PI,
             flipSpeed: 0.04 + Math.random() * 0.06,
@@ -116,14 +115,14 @@ const BlowingPetalCanvas = forwardRef<BlowingPetalCanvasHandle, BlowingPetalCanv
       window.addEventListener("mousemove", handleMouseMove);
       window.addEventListener("mouseleave", handleMouseLeave);
 
-      // Initialize baseline floating petals & ferns
-      const initialCount = 32;
+      // Baseline ambient petals
+      const initialCount = 34;
       const baselinePetals: Petal[] = [];
       const types: ("jasmine" | "fern" | "goldDust" | "rosePetal")[] = [
-        "jasmine",
         "fern",
-        "goldDust",
         "jasmine",
+        "goldDust",
+        "rosePetal",
         "fern",
       ];
 
@@ -131,12 +130,12 @@ const BlowingPetalCanvas = forwardRef<BlowingPetalCanvasHandle, BlowingPetalCanv
         baselinePetals.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          size: 8 + Math.random() * 14,
+          size: 9 + Math.random() * 14,
           speedX: (0.5 + Math.random() * 1.1) * windIntensity,
           speedY: (0.4 + Math.random() * 0.9) * windIntensity,
           rotation: Math.random() * Math.PI * 2,
           rotationSpeed: (Math.random() - 0.5) * 0.03,
-          opacity: 0.4 + Math.random() * 0.45,
+          opacity: 0.55 + Math.random() * 0.35,
           type: types[i % types.length],
           flip: Math.random() * Math.PI,
           flipSpeed: 0.02 + Math.random() * 0.03,
@@ -163,7 +162,7 @@ const BlowingPetalCanvas = forwardRef<BlowingPetalCanvasHandle, BlowingPetalCanv
           // Air friction on burst petals
           if (p.isBurst) {
             p.speedX *= 0.985;
-            p.speedY += 0.04; // Gentle gravity settling
+            p.speedY += 0.04;
             p.life = (p.life || 0) + 1;
             if (p.life > (p.maxLife || 180)) {
               currentList.splice(i, 1);
@@ -178,8 +177,8 @@ const BlowingPetalCanvas = forwardRef<BlowingPetalCanvasHandle, BlowingPetalCanv
             const dist = Math.sqrt(dx * dx + dy * dy);
             if (dist < 130) {
               const force = (130 - dist) / 130;
-              p.x += (dx / dist) * force * 4;
-              p.y += (dy / dist) * force * 4;
+              p.x += (dx / dist) * force * 4.5;
+              p.y += (dy / dist) * force * 4.5;
             }
           }
 
@@ -193,7 +192,7 @@ const BlowingPetalCanvas = forwardRef<BlowingPetalCanvasHandle, BlowingPetalCanv
             }
           }
 
-          // Render Petal Shape
+          // Render Petal Shape (Optimized for light luxury background)
           ctx.save();
           ctx.translate(p.x, p.y);
           ctx.rotate(p.rotation);
@@ -203,55 +202,65 @@ const BlowingPetalCanvas = forwardRef<BlowingPetalCanvasHandle, BlowingPetalCanv
           let currentOpacity = p.opacity;
           if (p.isBurst && p.life && p.maxLife) {
             const progress = p.life / p.maxLife;
-            if (progress > 0.7) {
-              currentOpacity *= 1 - (progress - 0.7) / 0.3;
+            if (progress > 0.75) {
+              currentOpacity *= 1 - (progress - 0.75) / 0.25;
             }
           }
 
           if (p.type === "jasmine") {
-            // Delicate ivory jasmine blossom petal
+            // Elegant ivory jasmine blossom petal with golden rim
             ctx.beginPath();
             ctx.moveTo(0, -p.size);
             ctx.bezierCurveTo(p.size * 0.75, -p.size * 0.3, p.size * 0.75, p.size * 0.5, 0, p.size);
             ctx.bezierCurveTo(-p.size * 0.75, p.size * 0.5, -p.size * 0.75, -p.size * 0.3, 0, -p.size);
-            ctx.fillStyle = `rgba(246, 241, 231, ${currentOpacity * 0.95})`;
+            ctx.fillStyle = `rgba(255, 252, 246, ${currentOpacity * 0.95})`;
+            ctx.shadowColor = "rgba(184, 137, 74, 0.3)";
+            ctx.shadowBlur = 4;
             ctx.fill();
 
-            // Gold trimmed edge
-            ctx.lineWidth = 0.75;
-            ctx.strokeStyle = `rgba(184, 137, 74, ${currentOpacity * 0.7})`;
+            // Gold trimmed edge for crisp definition on light backgrounds
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = `rgba(184, 137, 74, ${currentOpacity * 0.85})`;
             ctx.stroke();
           } else if (p.type === "rosePetal") {
-            // Soft blush / sunset petal
+            // Soft blush / coral sunset petal
             ctx.beginPath();
             ctx.moveTo(0, -p.size);
             ctx.bezierCurveTo(p.size * 0.85, -p.size * 0.2, p.size * 0.8, p.size * 0.6, 0, p.size * 0.9);
             ctx.bezierCurveTo(-p.size * 0.8, p.size * 0.6, -p.size * 0.85, -p.size * 0.2, 0, -p.size);
-            ctx.fillStyle = `rgba(224, 169, 145, ${currentOpacity * 0.85})`;
+            ctx.fillStyle = `rgba(228, 155, 135, ${currentOpacity * 0.85})`;
+            ctx.shadowColor = "rgba(228, 155, 135, 0.3)";
+            ctx.shadowBlur = 3;
             ctx.fill();
+
+            ctx.lineWidth = 0.75;
+            ctx.strokeStyle = `rgba(184, 110, 95, ${currentOpacity * 0.7})`;
+            ctx.stroke();
           } else if (p.type === "fern") {
-            // Fresh green Fernway leaf frond
+            // Fresh brand green Fernway leaf frond
             ctx.beginPath();
             ctx.moveTo(0, -p.size * 1.4);
             ctx.quadraticCurveTo(p.size * 0.55, 0, 0, p.size * 1.4);
             ctx.quadraticCurveTo(-p.size * 0.55, 0, 0, -p.size * 1.4);
-            ctx.fillStyle = `rgba(126, 154, 107, ${currentOpacity * 0.9})`;
+            ctx.fillStyle = `rgba(31, 74, 58, ${currentOpacity * 0.9})`;
+            ctx.shadowColor = "rgba(31, 74, 58, 0.25)";
+            ctx.shadowBlur = 3;
             ctx.fill();
 
-            // Leaf rib
+            // Distinct leaf rib
             ctx.beginPath();
             ctx.moveTo(0, -p.size * 1.3);
             ctx.lineTo(0, p.size * 1.3);
-            ctx.strokeStyle = `rgba(31, 74, 58, ${currentOpacity * 0.75})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `rgba(16, 40, 31, ${currentOpacity * 0.85})`;
+            ctx.lineWidth = 0.9;
             ctx.stroke();
           } else {
-            // Radiant golden dust particle
+            // Radiant golden ember dust particle
             ctx.beginPath();
-            ctx.arc(0, 0, p.size * 0.25, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(218, 165, 32, ${currentOpacity * 0.9})`;
-            ctx.shadowColor = "#D4AF37";
-            ctx.shadowBlur = 8;
+            ctx.arc(0, 0, p.size * 0.28, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(184, 137, 74, ${currentOpacity * 0.95})`;
+            ctx.shadowColor = "#B8894A";
+            ctx.shadowBlur = 6;
             ctx.fill();
           }
 
