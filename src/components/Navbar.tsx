@@ -91,6 +91,9 @@ export default function Navbar() {
             <a href="#how-it-works" className="hover:text-gold-600 transition-colors">
               How It Works
             </a>
+            <a href="#real-moments" className="hover:text-gold-600 transition-colors text-gold-700 font-semibold flex items-center gap-1">
+              <span>✦ Real Moments</span>
+            </a>
             <a href="#stories" className="hover:text-gold-600 transition-colors">
               Sisterhood Stories
             </a>
@@ -167,6 +170,13 @@ export default function Navbar() {
                 className="py-1 hover:text-gold-600"
               >
                 How It Works (5 Steps)
+              </a>
+              <a
+                href="#real-moments"
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-1 text-gold-700 font-semibold flex items-center gap-1"
+              >
+                <span>✦ Real Moments (Photos &amp; Reels)</span>
               </a>
               <a
                 href="#stories"

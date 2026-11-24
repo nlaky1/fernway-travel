@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import HeroBlowingPetalsSlider from "@/components/HeroBlowingPetalsSlider";
 import TrustStrip from "@/components/TrustStrip";
 import BrandPillars from "@/components/BrandPillars";
+import RealSisterhoodGallery from "@/components/RealSisterhoodGallery";
 import TripShowcase from "@/components/TripShowcase";
 import SafetyCharter from "@/components/SafetyCharter";
 import FoundersStory from "@/components/FoundersStory";
@@ -27,6 +28,9 @@ export default function Home() {
 
       {/* Curated Departures & Full Itineraries */}
       <TripShowcase />
+
+      {/* Real Unfiltered Sisterhood Moments & Video Reels (Client's Authentic Photos & Reels) */}
+      <RealSisterhoodGallery />
 
       {/* The 4 Brand Pillars (Explore • Travel • Connect • Grow) */}
       <BrandPillars />

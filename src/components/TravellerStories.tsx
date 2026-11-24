@@ -14,7 +14,7 @@ export default function TravellerStories() {
       quote:
         "My husband is not fond of trekking, and my college friends’ calendars never aligned. I had waited four years for Meghalaya. With Fernway, I didn't have to wait anymore. By day 2, we were swimming in crystalline spring waters like we were 16 again.",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+      image: "/real-travelers/sunglasses_nature_trek.webp",
     },
     {
       name: "Ananya Deshmukh",
@@ -25,7 +25,7 @@ export default function TravellerStories() {
       quote:
         "My parents were so worried about me travelling to Kashmir alone. Pallavi got on a video call with my mom and walked her through the whole security plan. The houseboat was pure royal luxury, and the women on this trip are now my closest friends in Bombay.",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
+      image: "/real-travelers/kashmir_tulip_sisters.webp",
     },
     {
       name: "Dr. Sunita Sen",
@@ -36,7 +36,7 @@ export default function TravellerStories() {
       quote:
         "Both my daughters have graduated from college, and I decided this decade belongs to me. I wanted comfort and dignity — not backpacker hostels. Fernway's boutique haveli and luxury desert camp exceeded every expectation. Pure joy and zero stress.",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
+      image: "/real-travelers/resort_terrace_view.webp",
     },
     {
       name: "Meera Nair",
@@ -47,7 +47,7 @@ export default function TravellerStories() {
       quote:
         "I booked this trip as a celebration of starting my own studio. The sound healing session at Pyramids of Chi and the private pool villa in Ubud gave me the exact spiritual rejuvenation I needed. Cannot wait for Vietnam with Fernway!",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+      image: "/real-travelers/luxury_gala_night.webp",
     },
   ];
 
