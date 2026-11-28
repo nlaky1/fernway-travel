@@ -15,20 +15,12 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-fern-800 text-gold-400 border border-gold-500/40">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-6 w-6 text-gold-400"
-                >
-                  <path d="M12 22C12 22 12 14 19 8C19 8 13.5 8 12 12" />
-                  <path d="M12 22C12 22 12 12 5 7C5 7 10.5 7 12 12" />
-                  <path d="M12 22V2" />
-                </svg>
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-fern-900 border border-gold-500/40 overflow-hidden p-1 shadow-md">
+                <img
+                  src="/brand/favicon_green_badge.png"
+                  alt="Fernway Emblem"
+                  className="h-full w-full object-contain"
+                />
               </div>
               <div>
                 <span className="font-serif text-2xl font-semibold tracking-wider text-ivory-100 block">

@@ -47,21 +47,13 @@ export default function Navbar() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo & Emblem */}
           <a href="#" className="flex items-center gap-3 group">
-            {/* Elegant SVG Fern Leaf & Horizon Monogram */}
-            <div className="relative flex h-11 w-11 items-center justify-center rounded-full bg-fern-800 text-gold-400 border border-gold-500/40 shadow-sm transition-transform group-hover:scale-105">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-6 w-6 text-gold-400"
-              >
-                <path d="M12 22C12 22 12 14 19 8C19 8 13.5 8 12 12" />
-                <path d="M12 22C12 22 12 12 5 7C5 7 10.5 7 12 12" />
-                <path d="M12 22V2" />
-              </svg>
+            {/* Official Fernway Brand Emblem */}
+            <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-white border border-gold-500/40 shadow-sm transition-transform group-hover:scale-105 overflow-hidden p-0.5">
+              <img
+                src="/brand/fernway_emblem.webp"
+                alt="Fernway Emblem"
+                className="h-full w-full object-contain"
+              />
             </div>
             <div className="flex flex-col">
               <span className="font-serif text-2xl font-semibold tracking-wider text-fern-950 group-hover:text-gold-700 transition-colors">

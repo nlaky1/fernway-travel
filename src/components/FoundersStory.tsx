@@ -10,34 +10,41 @@ export default function FoundersStory() {
         <div className="max-w-6xl mx-auto rounded-3xl bg-white border border-gold-500/30 shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 cut-paper-2">
           {/* Left Column: Portrait & Visual Emblem */}
           <div className="lg:col-span-5 relative min-h-[460px] bg-fern-900 flex flex-col justify-between p-8 text-ivory-100 overflow-hidden">
-            {/* Background Founder Image / Scenic Backdrop */}
+            {/* Background Founder Image / Scenic Backdrop (Pallavi Vyas in Kashmir) */}
             <div
-              className="absolute inset-0 bg-cover bg-center opacity-70"
+              className="absolute inset-0 bg-cover bg-center opacity-85 transition-transform duration-700 hover:scale-105"
               style={{
                 backgroundImage:
-                  "url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80')",
+                  "url('/brand/pallavi_vyas.webp')",
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-fern-950 via-fern-900/60 to-fern-950/40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-fern-950 via-fern-950/30 to-fern-950/20" />
             </div>
 
             {/* Top Badge */}
-            <div className="relative z-10 self-start rounded-full bg-white/20 backdrop-blur-md px-3.5 py-1 text-xs font-mono text-gold-300 border border-gold-500/30 flex items-center gap-2">
+            <div className="relative z-10 self-start rounded-full bg-black/50 backdrop-blur-md px-3.5 py-1 text-xs font-mono text-gold-300 border border-gold-500/30 flex items-center gap-2 shadow-sm">
               <Sparkles className="h-3.5 w-3.5 text-gold-400" />
               <span>THE FOUNDER'S VISION</span>
             </div>
 
             {/* Bottom Founder Note Card */}
-            <div className="relative z-10 rounded-2xl bg-black/60 backdrop-blur-md p-5 border border-gold-500/30 text-white">
+            <div className="relative z-10 rounded-2xl bg-black/65 backdrop-blur-md p-5 border border-gold-500/30 text-white shadow-xl">
               <p className="font-serif italic text-base text-gold-200">
-                "Women shouldn't have to put their travel dreams on hold just because they couldn't find the right company."
+                &quot;Women shouldn&apos;t have to put their travel dreams on hold just because they couldn&apos;t find the right company.&quot;
               </p>
-              <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-2 text-xs">
-                <div>
-                  <h4 className="font-serif text-lg font-medium text-ivory-100">
-                    Pallavi Vyas
-                  </h4>
-                  <p className="text-[11px] text-gold-400">Founder, Fernway</p>
+              <div className="mt-3.5 flex items-center justify-between border-t border-white/15 pt-2.5 text-xs">
+                <div className="flex items-center gap-3">
+                  <img
+                    src="/brand/pallavi_vyas.webp"
+                    alt="Pallavi Vyas"
+                    className="h-11 w-11 rounded-full object-cover border-2 border-gold-400 shadow-md flex-shrink-0"
+                  />
+                  <div>
+                    <h4 className="font-serif text-lg font-medium text-ivory-100 leading-tight">
+                      Pallavi Vyas
+                    </h4>
+                    <p className="text-[11px] text-gold-400 font-light">Founder, Fernway</p>
+                  </div>
                 </div>
                 <div className="font-script text-2xl text-gold-300">Pallavi</div>
               </div>
